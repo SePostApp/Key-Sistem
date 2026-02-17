@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Offers - Adsterra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2196F3;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #f44336;
+            --dark: #0d1117;
+            --darker: #010409;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #ffffff;
+            --text-muted: #8b949e;
+            --adsterra: #FF6B35;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--adsterra), #FF8C5A);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .checkpoint-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .checkpoint-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkpoint-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .checkpoint-desc {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .progress-count {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .ads-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ad-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+
+        .ad-item.active {
+            border-color: var(--primary);
+            background: rgba(33, 150, 243, 0.05);
+        }
+
+        .ad-item.completed {
+            border-color: var(--success);
+            background: rgba(76, 175, 80, 0.05);
+        }
+
+        .ad-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .ad-item.active .ad-number {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .ad-item.completed .ad-number {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .ad-item.completed .ad-number::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+        }
+
+        .ad-item.completed .ad-number span {
+            display: none;
+        }
+
+        .ad-content {
+            flex: 1;
+        }
+
+        .ad-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .ad-timer {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'Courier New', monospace;
+        }
+
+        .ad-item.completed .ad-timer {
+            color: var(--success);
+        }
+
+        .ad-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--adsterra);
+            color: white;
+            white-space: nowrap;
+        }
+
+        .ad-btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(255, 107, 53, 0.3);
+        }
+
+        .ad-btn:disabled {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        /* Tombol Done - Putih dengan background success */
+        .ad-btn.completed {
+            background: var(--success);
+            color: white;
+            font-weight: 700;
+        }
+
+        .unlock-section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 2px dashed var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .unlock-section.ready {
+            border-color: var(--success);
+            background: rgba(76, 175, 80, 0.05);
+            border-style: solid;
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+        }
+
+        .unlock-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .unlock-section.ready .unlock-icon {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: var(--success);
+            color: var(--success);
+            animation: bounce 0.6s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .unlock-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .unlock-section.ready .unlock-text {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .unlock-btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        .unlock-btn.active {
+            background: linear-gradient(135deg, var(--success), #66BB6A);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .unlock-btn.active:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .footer-text a {
+            color: var(--adsterra);
+            text-decoration: none;
+        }
+
+        /* Toast Container */
+        .toast-container {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 1001;
+            pointer-events: none;
+        }
+
+        .toast {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: auto;
+            min-width: 250px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.hiding {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+
+        .toast-icon {
+            font-size: 1.25rem;
+        }
+
+        .toast-success .toast-icon {
+            color: var(--success);
+        }
+
+        .toast-error .toast-icon {
+            color: var(--danger);
+        }
+
+        .toast-warning .toast-icon {
+            color: var(--warning);
+        }
+
+        @media (max-width: 480px) {
+            .ad-item {
+                flex-wrap: wrap;
+            }
+            .ad-btn {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+            .toast-container {
+                left: 1rem;
+                right: 1rem;
+                transform: none;
+            }
+            .toast {
+                min-width: auto;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h1>KeyGuard</h1>
+            <p>Complete all actions to unlock content</p>
+        </div>
+
+        <div class="checkpoint-card">
+            <div class="checkpoint-header">
+                <div class="checkpoint-title">Checkpoint <span id="cycleNum">1</span></div>
+                <div class="checkpoint-desc">Click all 5 ads below and wait 60 seconds each</div>
+            </div>
+
+            <div class="progress-text">
+                Unlock Progress (<span class="progress-count" id="progressText">0/5</span>)
+            </div>
+
+            <div class="ads-list" id="adsList">
+                <!-- Ads generated by JS -->
+            </div>
+
+            <div class="unlock-section" id="unlockSection">
+                <div class="unlock-icon" id="unlockIcon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="unlock-text" id="unlockText">
+                    Complete all 5 ads to unlock content
+                </div>
+                <button class="unlock-btn" id="unlockBtn" onclick="unlockContent()" disabled>
+                    <i class="fas fa-lock"></i>
+                    <span>Unlock Content</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="footer-text">
+            Powered by <a href="#">Adsterra</a> - You Create, We Monetize
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        // ==========================================
+        // CONFIGURATION
+        // ==========================================
+        
+        const ADSTERRA_LINKS = [
+            'https://www.adsterra.com/direct-link-1',
+            'https://www.adsterra.com/direct-link-2',
+            'https://www.adsterra.com/direct-link-3',
+            'https://www.adsterra.com/direct-link-4',
+            'https://www.adsterra.com/direct-link-5'
+        ];
+
+        const WAIT_TIME = 60; // seconds
+
+        // ==========================================
+        // STATE - Separate timer references for each ad
+        // ==========================================
+        
+        const AdManager = {
+            sessionId: null,
+            cycle: 1,
+            ads: [
+                { completed: false, clicked: false, timeRemaining: WAIT_TIME, timerId: null },
+                { completed: false, clicked: false, timeRemaining: WAIT_TIME, timerId: null },
+                { completed: false, clicked: false, timeRemaining: WAIT_TIME, timerId: null },
+                { completed: false, clicked: false, timeRemaining: WAIT_TIME, timerId: null },
+                { completed: false, clicked: false, timeRemaining: WAIT_TIME, timerId: null }
+            ],
+            
+            isCompleted(index) {
+                return this.ads[index].completed;
+            },
+            
+            isActive(index) {
+                return this.ads[index].clicked && !this.ads[index].completed;
+            },
+            
+            startAd(index) {
+                if (this.ads[index].completed || this.ads[index].clicked) return false;
+                
+                this.ads[index].clicked = true;
+                this.ads[index].timeRemaining = WAIT_TIME;
+                return true;
+            },
+            
+            tick(index) {
+                if (this.ads[index].completed) return false;
+                
+                this.ads[index].timeRemaining--;
+                
+                if (this.ads[index].timeRemaining <= 0) {
+                    this.completeAd(index);
+                    return true; // completed
+                }
+                return false; // still running
+            },
+            
+            completeAd(index) {
+                this.ads[index].completed = true;
+                this.ads[index].clicked = false;
+                if (this.ads[index].timerId) {
+                    clearInterval(this.ads[index].timerId);
+                    this.ads[index].timerId = null;
+                }
+            },
+            
+            setTimer(index, timerId) {
+                this.ads[index].timerId = timerId;
+            },
+            
+            clearTimer(index) {
+                if (this.ads[index].timerId) {
+                    clearInterval(this.ads[index].timerId);
+                    this.ads[index].timerId = null;
+                }
+            },
+            
+            clearAllTimers() {
+                this.ads.forEach((ad, index) => this.clearTimer(index));
+            },
+            
+            getCompletedCount() {
+                return this.ads.filter(ad => ad.completed).length;
+            },
+            
+            allCompleted() {
+                return this.ads.every(ad => ad.completed);
+            }
+        };
+
+        let toastIdCounter = 0;
+        let activeToasts = new Map();
+
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            initFromURL();
+            renderAds();
+            updateProgress();
+        });
+
+        function initFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            AdManager.sessionId = urlParams.get('sid') || 'unknown';
+            AdManager.cycle = urlParams.get('cycle') || '1';
+            document.getElementById('cycleNum').textContent = AdManager.cycle;
+        }
+
+        // ==========================================
+        // TOAST SYSTEM
+        // ==========================================
+        
+        function showToast(message, type = 'success', duration = 3000) {
+            const container = document.getElementById('toastContainer');
+            const id = 'toast-' + (++toastIdCounter);
+            
+            const toast = document.createElement('div');
+            toast.id = id;
+            toast.className = `toast toast-${type}`;
+            
+            const iconClass = type === 'success' ? 'fa-check-circle' : 
+                             type === 'error' ? 'fa-exclamation-circle' : 
+                             type === 'warning' ? 'fa-exclamation-triangle' : 'fa-info-circle';
+            
+            toast.innerHTML = `
+                <i class="fas ${iconClass} toast-icon"></i>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            activeToasts.set(id, toast);
+            
+            requestAnimationFrame(() => {
+                toast.classList.add('show');
+            });
+            
+            const removeTimeout = setTimeout(() => {
+                hideToast(id);
+            }, duration);
+            
+            toast.dataset.timeoutId = removeTimeout;
+            
+            return id;
+        }
+
+        function hideToast(id) {
+            const toast = activeToasts.get(id);
+            if (!toast) return;
+            
+            if (toast.dataset.timeoutId) {
+                clearTimeout(parseInt(toast.dataset.timeoutId));
+            }
+            
+            toast.classList.remove('show');
+            toast.classList.add('hiding');
+            
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+                activeToasts.delete(id);
+            }, 300);
+        }
+
+        function clearAllToasts() {
+            activeToasts.forEach((toast, id) => {
+                hideToast(id);
+            });
+        }
+
+        // ==========================================
+        // RENDER ADS
+        // ==========================================
+        
+        function renderAds() {
+            const container = document.getElementById('adsList');
+            container.innerHTML = '';
+
+            for (let i = 0; i < 5; i++) {
+                const isCompleted = AdManager.isCompleted(i);
+                const isActive = AdManager.isActive(i);
+                
+                const adItem = document.createElement('div');
+                adItem.className = `ad-item ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;
+                adItem.id = `adItem${i}`;
+                
+                const timerText = isCompleted ? 'Completed!' : 
+                    (isActive ? formatTime(AdManager.ads[i].timeRemaining) : 'Click to start');
+                
+                adItem.innerHTML = `
+                    <div class="ad-number">
+                        <span>${i + 1}</span>
+                    </div>
+                    <div class="ad-content">
+                        <div class="ad-title">Ad ${i + 1}</div>
+                        <div class="ad-timer" id="adTimer${i}">${timerText}</div>
+                    </div>
+                    <button class="ad-btn ${isCompleted ? 'completed' : ''}" 
+                            id="adBtn${i}" 
+                            onclick="startAd(${i})" 
+                            ${isCompleted ? 'disabled' : ''}>
+                        ${isCompleted ? '<i class="fas fa-check"></i> Done' : 'START'}
+                    </button>
+                `;
+                
+                container.appendChild(adItem);
+            }
+        }
+
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60);
+            const s = seconds % 60;
+            return `${m}:${s.toString().padStart(2, '0')} remaining`;
+        }
+
+        // ==========================================
+        // AD LOGIC - Fixed for multiple simultaneous timers
+        // ==========================================
+        
+        function startAd(index) {
+            if (!AdManager.startAd(index)) {
+                console.log(`Ad ${index} already started or completed`);
+                return;
+            }
+            
+            // Open Adsterra in new tab
+            const url = ADSTERRA_LINKS[index] + '?sid=' + AdManager.sessionId + '&ad=' + index;
+            window.open(url, '_blank');
+            
+            // Update UI immediately
+            const adItem = document.getElementById(`adItem${index}`);
+            const adBtn = document.getElementById(`adBtn${index}`);
+            
+            adItem.classList.add('active');
+            adBtn.textContent = 'WAIT...';
+            adBtn.disabled = true;
+            
+            showToast(`Ad ${index + 1} started! Wait 60s...`, 'success', 4000);
+            
+            // Create separate timer for this specific ad
+            const timerId = setInterval(() => {
+                const completed = AdManager.tick(index);
+                
+                // Update display
+                const timerEl = document.getElementById(`adTimer${index}`);
+                if (timerEl && !AdManager.isCompleted(index)) {
+                    timerEl.textContent = formatTime(AdManager.ads[index].timeRemaining);
+                }
+                
+                if (completed) {
+                    finalizeAd(index);
+                }
+            }, 1000);
+            
+            // Store timer reference
+            AdManager.setTimer(index, timerId);
+        }
+
+        function finalizeAd(index) {
+            // Update UI to completed state
+            const adItem = document.getElementById(`adItem${index}`);
+            const adBtn = document.getElementById(`adBtn${index}`);
+            const adTimer = document.getElementById(`adTimer${index}`);
+            
+            adItem.classList.remove('active');
+            adItem.classList.add('completed');
+            adBtn.innerHTML = '<i class="fas fa-check"></i> Done';
+            adBtn.classList.add('completed');
+            adBtn.disabled = true;
+            adTimer.textContent = 'Completed!';
+            
+            updateProgress();
+            showToast(`Ad ${index + 1} completed!`, 'success', 3000);
+            
+            checkAllCompleted();
+        }
+
+        function updateProgress() {
+            const completed = AdManager.getCompletedCount();
+            document.getElementById('progressText').textContent = `${completed}/5`;
+        }
+
+        function checkAllCompleted() {
+            if (!AdManager.allCompleted()) return;
+            
+            const unlockSection = document.getElementById('unlockSection');
+            const unlockBtn = document.getElementById('unlockBtn');
+            const unlockIcon = document.getElementById('unlockIcon');
+            const unlockText = document.getElementById('unlockText');
+            
+            unlockSection.classList.add('ready');
+            unlockBtn.classList.add('active');
+            unlockBtn.disabled = false;
+            unlockBtn.innerHTML = '<i class="fas fa-unlock"></i><span>Unlock Content</span>';
+            unlockIcon.innerHTML = '<i class="fas fa-unlock"></i>';
+            unlockText.textContent = 'All ads completed! Click to return and unlock progress.';
+            
+            showToast('🎉 All ads completed! Unlock available', 'success', 5000);
+        }
+
+        // ==========================================
+        // UNLOCK CONTENT
+        // ==========================================
+        
+        function unlockContent() {
+            if (!AdManager.allCompleted()) return;
+            
+            clearAllToasts();
+            AdManager.clearAllTimers();
+            
+            const mainUrl = 'https://sepostapp.github.io/Key-Sistem?completed=true&verify=' + state.sessionId;
+            window.location.href = mainUrl;
+        }
+
+        // Cleanup
+        window.addEventListener('beforeunload', () => {
+            clearAllToasts();
+            AdManager.clearAllTimers();
+        });
+
+        // Expose functions
+        window.startAd = startAd;
+        window.unlockContent = unlockContent;
+    </script>
+</body>
+</html>
