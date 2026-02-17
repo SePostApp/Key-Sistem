@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key System - Adsterra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2196F3;
+            --primary-dark: #1976D2;
+            --primary-light: #64B5F6;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #f44336;
+            --dark: #0d1117;
+            --darker: #010409;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #ffffff;
+            --text-muted: #8b949e;
+            --adsterra: #FF6B35;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(33, 150, 243, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 107, 53, 0.05) 0%, transparent 50%);
+            animation: bgPulse 10s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        header {
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .status-badge {
+            background: rgba(33, 150, 243, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid rgba(33, 150, 243, 0.2);
+        }
+
+        main {
+            padding: 3rem 0;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .main-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .progress-count {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .progress-bar-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50px;
+            height: 16px;
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 50px;
+            transition: width 0.6s ease;
+        }
+
+        .action-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .start-btn {
+            width: 100%;
+            padding: 1.25rem;
+            border: none;
+            border-radius: 16px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, var(--adsterra), #FF8C5A);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .start-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+        }
+
+        .start-btn:disabled {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 1.25rem;
+            border: none;
+            border-radius: 16px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        .generate-btn.active {
+            background: linear-gradient(135deg, var(--success), #66BB6A);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+            animation: pulse-green 2s infinite;
+        }
+
+        .generate-btn.active:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
+        }
+
+        @keyframes pulse-green {
+            0%, 100% { box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3); }
+            50% { box-shadow: 0 8px 35px rgba(76, 175, 80, 0.5); }
+        }
+
+        .info-box {
+            background: rgba(255, 107, 53, 0.05);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--adsterra);
+        }
+
+        .info-box i {
+            font-size: 1.25rem;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 2rem 0;
+        }
+
+        .keys-section h3 {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .keys-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            animation: fadeIn 0.3s;
+        }
+
+        .key-item:hover {
+            border-color: var(--primary);
+            background: rgba(33, 150, 243, 0.05);
+        }
+
+        .key-value {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .key-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .key-actions-small {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .icon-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+        }
+
+        .empty-state i {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            opacity: 0.5;
+        }
+
+        .session-info {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .session-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .session-item i {
+            color: var(--primary);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transform: translateX(400px);
+            transition: transform 0.3s;
+            z-index: 1001;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 1.5rem; }
+            .main-card { padding: 1.5rem; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-key"></i>
+                    <span>KeyGuard</span>
+                </div>
+                <div class="status-badge">
+                    <span></span>
+                    System Online
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero-section">
+                <h1 class="hero-title">Generate Access Key</h1>
+                <p class="hero-subtitle">
+                    Complete 2 offer cycles to generate your key
+                </p>
+            </section>
+
+            <div class="main-card">
+                <div class="progress-info">
+                    <span class="progress-text">Progress</span>
+                    <span class="progress-count"><span id="currentProgress">0</span>/2</span>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                </div>
+
+                <div class="info-box" id="infoBox">
+                    <i class="fas fa-info-circle"></i>
+                    <div>Each offer contains 5 ads. Complete all to unlock.</div>
+                </div>
+
+                <div class="action-section">
+                    <button class="start-btn" id="startBtn" onclick="startOffer()">
+                        <i class="fas fa-play"></i>
+                        START OFFER <span id="offerNum">1</span>
+                    </button>
+
+                    <button class="generate-btn" id="generateBtn" onclick="generateKey()" disabled>
+                        <i class="fas fa-lock"></i>
+                        Generate Key
+                    </button>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="keys-section">
+                    <h3><i class="fas fa-history"></i> Generated Keys</h3>
+                    <div class="keys-list" id="keysList">
+                        <div class="empty-state">
+                            <i class="fas fa-key"></i>
+                            <div>No keys generated yet</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="session-info">
+                    <div class="session-item">
+                        <i class="fas fa-fingerprint"></i>
+                        <span id="sessionId">-</span>
+                    </div>
+                    <div class="session-item">
+                        <i class="fas fa-ad"></i>
+                        <span>Adsterra</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="toast" id="toast">
+        <i class="fas fa-check" style="color: var(--success);"></i>
+        <span id="toastMsg">Success</span>
+    </div>
+
+    <script>
+        // ==========================================
+        // STATE
+        // ==========================================
+        
+        let state = {
+            progress: 0,
+            sessionId: null,
+            keys: []
+        };
+
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            initSession();
+            checkCallback();
+            updateUI();
+            renderKeysList();
+        });
+
+        function initSession() {
+            const saved = localStorage.getItem('kg_main_session');
+            if (saved) {
+                const data = JSON.parse(saved);
+                state.progress = data.progress || 0;
+                state.keys = data.keys || [];
+                state.sessionId = data.sessionId || generateId();
+            } else {
+                state.sessionId = generateId();
+            }
+            document.getElementById('sessionId').textContent = state.sessionId;
+            saveSession();
+        }
+
+        function generateId() {
+            return 'KG-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+        }
+
+        function saveSession() {
+            localStorage.setItem('kg_main_session', JSON.stringify({
+                progress: state.progress,
+                keys: state.keys,
+                sessionId: state.sessionId
+            }));
+        }
+
+        // ==========================================
+        // CHECK CALLBACK DARI OFFER PAGE
+        // ==========================================
+        
+        function checkCallback() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const completed = urlParams.get('completed');
+            const verify = urlParams.get('verify');
+            
+            if (completed === 'true' && verify === state.sessionId) {
+                // User kembali dari offer page setelah complete 5 ads
+                if (state.progress < 2) {
+                    state.progress++;
+                    saveSession();
+                    updateUI();
+                    showToast(`Offer cycle completed! Progress: ${state.progress}/2`);
+                    
+                    // Clear URL params
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            }
+        }
+
+        // ==========================================
+        // START OFFER
+        // ==========================================
+        
+        function startOffer() {
+            if (state.progress >= 2) return;
+            
+            // Buka offer page di tab baru dengan session ID
+            const offerUrl = 'offer.html?sid=' + state.sessionId + '&cycle=' + (state.progress + 1);
+            window.open(offerUrl, '_blank');
+        }
+
+        // ==========================================
+        // UI UPDATES
+        // ==========================================
+        
+        function updateUI() {
+            const pct = (state.progress / 2) * 100;
+            document.getElementById('progressBar').style.width = pct + '%';
+            document.getElementById('currentProgress').textContent = state.progress;
+            
+            const startBtn = document.getElementById('startBtn');
+            const generateBtn = document.getElementById('generateBtn');
+            const offerNum = document.getElementById('offerNum');
+            const infoBox = document.getElementById('infoBox');
+            
+            if (state.progress >= 2) {
+                startBtn.disabled = true;
+                startBtn.innerHTML = '<i class="fas fa-check-circle"></i> All Offers Completed';
+                
+                generateBtn.disabled = false;
+                generateBtn.classList.add('active');
+                generateBtn.innerHTML = '<i class="fas fa-key"></i> Generate Key';
+                
+                infoBox.innerHTML = '<i class="fas fa-unlock"></i><div>All offers completed! Click Generate Key to get your access key.</div>';
+            } else {
+                offerNum.textContent = state.progress + 1;
+            }
+        }
+
+        // ==========================================
+        // GENERATE KEY
+        // ==========================================
+        
+        function generateKey() {
+            if (state.progress < 2) return;
+            
+            const key = 'KG-' + randomSeg() + '-' + randomSeg() + '-' + randomSeg();
+            
+            state.keys.push({
+                key: key,
+                created: new Date().toISOString()
+            });
+            
+            // Reset progress untuk next cycle
+            state.progress = 0;
+            
+            saveSession();
+            renderKeysList();
+            resetUI();
+            
+            showToast('✅ Key generated successfully!');
+        }
+
+        function resetUI() {
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('currentProgress').textContent = '0';
+            
+            const startBtn = document.getElementById('startBtn');
+            const generateBtn = document.getElementById('generateBtn');
+            const infoBox = document.getElementById('infoBox');
+            
+            startBtn.disabled = false;
+            startBtn.innerHTML = '<i class="fas fa-play"></i> START OFFER <span id="offerNum">1</span>';
+            
+            generateBtn.disabled = true;
+            generateBtn.classList.remove('active');
+            generateBtn.innerHTML = '<i class="fas fa-lock"></i> Generate Key';
+            
+            infoBox.innerHTML = '<i class="fas fa-info-circle"></i><div>Each offer contains 5 ads. Complete all to unlock.</div>';
+        }
+
+        function randomSeg() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let res = '';
+            for (let i = 0; i < 4; i++) {
+                res += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return res;
+        }
+
+        // ==========================================
+        // KEYS LIST
+        // ==========================================
+        
+        function renderKeysList() {
+            const container = document.getElementById('keysList');
+            
+            if (state.keys.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-key"></i>
+                        <div>No keys generated yet</div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = state.keys.slice().reverse().map((keyData, index) => `
+                <div class="key-item" style="animation: fadeIn 0.3s ${index * 0.1}s both;">
+                    <div>
+                        <div class="key-value">${keyData.key}</div>
+                        <div class="key-date">${new Date(keyData.created).toLocaleString()}</div>
+                    </div>
+                    <div class="key-actions-small">
+                        <button class="icon-btn" onclick="copyKey('${keyData.key}')" title="Copy">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button class="icon-btn" onclick="downloadKey('${keyData.key}')" title="Download">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ==========================================
+        // UTILITIES
+        // ==========================================
+        
+        function copyKey(key) {
+            navigator.clipboard.writeText(key).then(() => showToast('Key copied!'));
+        }
+
+        function downloadKey(key) {
+            const blob = new Blob([`Key: ${key}\nGenerated: ${new Date().toLocaleString()}`], {type: 'text/plain'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `key-${key}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('Key downloaded!');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        window.startOffer = startOffer;
+        window.generateKey = generateKey;
+        window.copyKey = copyKey;
+        window.downloadKey = downloadKey;
+    </script>
+</body>
+</html>
