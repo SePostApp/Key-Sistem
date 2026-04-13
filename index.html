@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="Antrean Online" content="yes" />
+    <meta name="Antrean Online" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <title>antrean online</title>
+    <meta name="description" content="Login & Register Reset Password | antrean web id online">
+    <meta name="keywords" content="Akses layanan antrean LM web id | Login & Register Reset Password | antrean web id online" />
+
+    <link rel="preconnect" href="https://challenges.cloudflare.com">
+    <link rel="stylesheet" href="https://antrean.logammulia.com//assets/appmobile/assets/css/style.css">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="https://antrean.logammulia.com/assets/appmobile/assets/img/icon/belm/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://antrean.logammulia.com/assets/appmobile/assets/img/icon/belm/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://antrean.logammulia.com/assets/appmobile/assets/img/icon/belm/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://antrean.logammulia.com/assets/appmobile/assets/img/icon/belm/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://antrean.logammulia.com/assets/appmobile/assets/img/icon/belm/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://antrean.logammulia.com/assets/appmobile/assets/img/icon/belm/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://antrean.logammulia.com/assets/appmobile/assets/img/icon/belm/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://antrean.logammulia.com/assets/appmobile/assets/img/icon/belm/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://antrean.logammulia.com/assets/appmobile/assets/img/icon/belm/apple-icon-180x180.png">
+
+    <link rel="icon" type="image/png" sizes="192x192" href="https://antrean.logammulia.com/assets/appmobile/assets/img/icon/belm/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://antrean.logammulia.com/assets/appmobile/assets/img/icon/belm/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://antrean.logammulia.com/assets/appmobile/assets/img/icon/belm/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://antrean.logammulia.com/assets/appmobile/assets/img/icon/belm/favicon-16x16.png">
+    <link rel="manifest" href="https://antrean.logammulia.com/assets/appmobile/assets/img/icon/belm/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="https://antrean.logammulia.com/assets/appmobile/assets/img/icon/belm/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <style>
+        .header-antrian {
+            text-align: center;
+            background: #004aad;
+            color: white;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .tanggal {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .jam {
+            font-size: 36px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .big-number {
+            font-size: 60px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- loader -->
+    <!-- <div id="loader">
+        <img src="https://antrean.logammulia.com//assets/appmobile/assets/img/loading-icon.png" alt="icon" class="loading-icon">
+    </div> -->
+    <!-- * loader -->
+
+    <!-- App Header -->
+    <div class="appHeader">
+        <div class="left">
+            <a href="https://antrean.logammulia.com/users" class="headerButton goBack">
+                <ion-icon name="chevron-back-outline"></ion-icon>Profile
+            </a>
+        </div>
+        <div class="pageTitle">
+            Antrean BELM
+        </div>
+        <div class="right">
+            <a href="https://antrean.logammulia.com/logout" class="headerButton">
+                Logout<ion-icon name="log-out-outline"></ion-icon>
+            </a>
+        </div>
+    </div>
+    <!-- * App Header -->
+
+    <!-- Notifikasi -->
+        <!-- Notifikasi -->
+
+    
+        <!-- * Dialog Basic -->
+
+    <!-- App Capsule -->
+    <div id="appCapsule">
+
+        <div class="section mt-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="p-1">
+                        <div class="text-center">
+                            <h2 class="text-primary">
+                                <div class="tanggal" id="tanggal"></div>
+                                <div class="jam" id="clock"></div>
+
+                                                                    <p>--------------------</p>
+                                
+                            </h2>
+                            <!-- <div class="header-antrian">
+                                   
+                                </div> -->
+                        </div>
+                        <!-- <form id="form" method="post"> -->
+                        <form action="https://antrean.logammulia.com/antrean" method="get" class="row g-3" accept-charset="utf-8">
+                        <div class="form-group basic animated">
+                            <div class="input-wrapper">
+
+                                <select name="site" id="site" class="form-control" required>
+                                    <option value="">-- Pilih BELM --</option>
+                                                                            <option value="31" >
+                                            ATGM-Gedung Antam                                        </option>
+                                                                            <option value="30" >
+                                            ATGM-Graha Dipta                                        </option>
+                                                                            <option value="4" >
+                                            Butik Emas LM - Balikpapan                                        </option>
+                                                                            <option value="1" >
+                                            Butik Emas LM - Bandung                                        </option>
+                                                                            <option value="19" >
+                                            Butik Emas LM - Bekasi                                        </option>
+                                                                            <option value="16" >
+                                            Butik Emas LM - Bintaro                                        </option>
+                                                                            <option value="17" >
+                                            Butik Emas LM - Bogor                                        </option>
+                                                                            <option value="5" >
+                                            Butik Emas LM - Denpasar                                        </option>
+                                                                            <option value="20" >
+                                            Butik Emas LM - Djuanda                                        </option>
+                                                                            <option value="6" >
+                                            Butik Emas LM - Gedung Antam                                        </option>
+                                                                            <option value="3" >
+                                            Butik Emas LM - Graha Dipta                                        </option>
+                                                                            <option value="11" >
+                                            Butik Emas LM - Makassar                                        </option>
+                                                                            <option value="10" >
+                                            Butik Emas LM - Medan                                        </option>
+                                                                            <option value="12" >
+                                            Butik Emas LM - Palembang                                        </option>
+                                                                            <option value="24" >
+                                            Butik Emas LM - Pekanbaru                                        </option>
+                                                                            <option value="21" >
+                                            Butik Emas LM - Puri Indah                                        </option>
+                                                                            <option value="15"  selected="selected">
+                                            Butik Emas LM - Semarang                                        </option>
+                                                                            <option value="23" >
+                                            Butik Emas LM - Serpong                                        </option>
+                                                                            <option value="8" >
+                                            Butik Emas LM - Setiabudi One                                        </option>
+                                                                            <option value="13" >
+                                            Butik Emas LM - Surabaya 1 Darmo                                        </option>
+                                                                            <option value="14" >
+                                            Butik Emas LM - Surabaya 2 Pakuwon                                        </option>
+                                                                            <option value="9" >
+                                            Butik Emas LM - Yogyakarta                                        </option>
+                                                                    </select>
+
+
+                                <input type="hidden" class="form-control" name="t" id="t" value="06fb83e6cfd377b00d3f664cb086d02463bcbe715768112a0dffc5bf4cdea496">
+
+                            </div>
+                        </div>
+
+
+                        <div class="mt-2">
+                            <button class="btn btn-primary btn-lg btn-block w-100">Tampilkan Butik</button>
+
+                        </div>
+                        </form>                        <!-- </form> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                    <div class="section mt-1 mb-1">
+                <div class="section-title"></div>
+                <div class="card">
+                    <div class="card-body">
+
+                                                    <div class="text-center">
+                                <h2 class="text-primary">Kuota Tidak Tersedia</h2>
+                                Butik Emas LM - Semarang                            </div>
+                            <!-- <form> -->
+                            <form action="https://antrean.logammulia.com/masuk-pool" method="post" accept-charset="utf-8">
+<input type="hidden" name="csrf_test_name" value="c8e8d912c720820585e70115da5ec0ab" />                                                                                          
+                            <div class="text-center">Sisa : <span class="badge bg-danger">0</span><br>
+                                <span> Sesi waktu ambil antrean : Pukul 09:00 - 11:00 WIB</span>
+                            </div>
+                            <style>
+                                .info-box {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: flex-start;
+                                    padding: 12px 15px;
+                                    border: 1px solid #ccc;
+                                    border-radius: 10px;
+                                    background-color: #f9fafb;
+                                    line-height: 1.6;
+                                    color: #333;
+                                    text-align: justify;
+                                    font-size: 0.95rem;
+                                }
+
+                                .label {
+                                    display: block;
+                                    font-weight: 600;
+                                    color: #004aad;
+                                    margin-bottom: 6px;
+                                }
+
+                                @media (max-width: 600px) {
+                                    .info-box {
+                                        padding: 10px 12px;
+                                        font-size: 0.9rem;
+                                    }
+                                }
+                            </style>
+
+                            <div class="form-group boxed">
+                                <label class="label">
+                                                                            GRAMASI TERSEDIA : 50GR, 100GR & 250GR                                                                     </label>
+                                <div class="info-box">
+                                                                            <span>1. Sobat Mulia dapat melakukan pembelian tanpa minimal atau maksimal jumlah pembelian untuk Produk Emas Certicard dengan menyesuaikan ketersediaan stok di Butik.<br />
+2. Produk cast bar (250, 500, dan 1.000 gr), Gift Series, dan Produk Tematik lainnya (seperti Imlek, Idul Fitri, & Natal) tidak ada pembatasan dan dapat transaksi tanpa mendaftar antrean online pada website antrean.logammulia.com.<br />
+3. Setiap 1 (satu) KTP hanya dapat melakukan transaksi dengan jumlah pembelian menyesuaikan ketersediaan stok di Butik Emas Logam Mulia dan maksimal 8 (delapan) kali dalam 1 (satu) bulan kalender untuk Produk Emas Certicard baik melalui website logammulia.com maupun pembelian langsung di Butik Emas Logam Mulia.<br />
+4. Transaksi tidak dapat diwakilkan atau dikuasakan dan wajib dilakukan oleh pemilik KTP yang terdaftar.<br />
+5. Nomor antrean yang diperoleh melalui website tidak menjamin ketersediaan stok, dan ketersediaan produk dapat berubah sewaktu-waktu sesuai kondisi penjualan pada saat transaksi berlangsung.<br />
+6. Pelanggan diharapkan hadir sesuai dengan jam kedatangan yang tertera pada nomor antrean.<br />
+7. Nomor antrean yang diperoleh melalui website merupakan nomor antrean resmi yang berlaku di Butik Emas Logam Mulia sesuai lokasi yang dipilih.<br />
+8. Pembelian Emas Antam Logam Mulia dapat melalui kanal penjualan resmi Antam (COD, website logammulia.com dan e-commerce). </span>
+                                        <!-- <span>"informasi Stock maintenance"</span> -->
+                                                                    </div>
+                            </div>
+
+
+
+
+                                                            <div class="form-group boxed">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="wakda"></label>
+                                        <select class="form-control custom-select" id="wakda" name="wakda" required>
+                                            <option value="">--Pilih Waktu Kedatangan--</option>
+                                                                                            <!-- <option value="147" disabled>
+                                                    Pukul • 09:00-12:00 WIB (❌ Penuh 10/10)                                                </option> -->
+                                                <option value="147"
+                                                    disabled>
+                                                    Pukul • 09:00-12:00 WIB (❌ Penuh 10/10)                                                </option>
+                                                                                    </select>
+                                    </div>
+
+                                </div>
+                                <center>
+
+                                    <div class="form-group boxed">
+                                        <div class="input-wrapper">
+                                            <button class="btn btn-secondary rounded shadowed  me-1 mb-1" disabled>Penuh</button>
+                                        </div>
+                                    </div>
+                                </center>
+                                                        <!-- </form> -->
+                            </form>                                            </div>
+                </div>
+            </div>
+
+        
+    </div>
+    <!-- * App Capsule -->
+
+    <!-- App Bottom Menu -->
+    <div class="appBottomMenu">
+
+        <a href="#" class="item">
+            <div class="col">
+                <ion-icon name="apps-outline"></ion-icon>
+
+            </div>
+        </a>
+
+    </div>
+    <!-- * App Bottom Menu -->
+
+    <!-- jQuery_ coudfalre -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+    <!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
+    <!--load swal js -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- ========= JS Files =========  -->
+    <!-- Bootstrap -->
+    <script src="https://antrean.logammulia.com//assets/appmobile/assets/js/lib/bootstrap.bundle.min.js"></script>
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- Splide -->
+    <script src="https://antrean.logammulia.com//assets/appmobile/assets/js/plugins/splide/splide.min.js"></script>
+    <!-- Base Js File -->
+    <script src="https://antrean.logammulia.com//assets/appmobile/assets/js/base.js"></script>
+    <script>
+        function updateDateTime() {
+            var now = new Date();
+
+            // Format tanggal Indonesia
+            var options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+            var tanggal = now.toLocaleDateString('id-ID', options);
+
+            // Jam, menit, detik
+            var hours = String(now.getHours()).padStart(2, '0');
+            var minutes = String(now.getMinutes()).padStart(2, '0');
+            var seconds = String(now.getSeconds()).padStart(2, '0');
+            var currentTime = hours + ":" + minutes + ":" + seconds;
+
+            // Masukkan ke elemen
+            document.getElementById("tanggal").textContent = tanggal;
+            document.getElementById("clock").textContent = currentTime;
+        }
+
+        // Panggil pertama kali
+        updateDateTime();
+
+        // Update setiap detik
+        setInterval(updateDateTime, 1000);
+    </script>
+
+    <script>
+        // Add to Home with 2 seconds delay.
+        AddtoHome("2000", "once");
+    </script>
+
+    <!-- Pesan Error -->
+        <!-- Pesan warning -->
+    
+    <!-- Pesan info -->
+        <!-- Pesan success login -->
+    
+    
+    <!-- Pesan success -->
+    
+    <!-- Pesan form validation -->
+    
+    <!-- //error -->
+
+    <script>
+        // Optional: perbarui token setiap cabang berubah (bisa statis juga)
+        function updateToken() {
+            document.getElementById('t').value = '06fb83e6cfd377b00d3f664cb086d02463bcbe715768112a0dffc5bf4cdea496';
+        }
+    </script>
+
+</body>
+
+</html>
